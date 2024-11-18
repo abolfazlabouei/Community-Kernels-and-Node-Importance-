@@ -41,9 +41,6 @@ class HybridCommunityDetection:
                 self.labels[node] = len(self.kernels)
                 
     def calculate_node_importance(self):
-        """
-        Calculate node importance using degree centrality and local structure.
-        """
         degree_cent = nx.degree_centrality(self.graph)
         clustering_coef = nx.clustering(self.graph)
         
@@ -53,13 +50,6 @@ class HybridCommunityDetection:
                                         0.1 * clustering_coef[node])
     
     def propagate_labels(self, max_iterations=100, threshold=0.0001):
-        """
-        Perform label propagation with node importance weights.
-        
-        Args:
-            max_iterations (int): Maximum number of iterations
-            threshold (float): Convergence threshold
-        """
         # Initialize remaining nodes with unique labels
         current_label = len(self.kernels) + 1
         for node in self.graph.nodes():
@@ -130,15 +120,6 @@ class HybridCommunityDetection:
                                      communities.values())
 
 def load_graph_from_csv(csv_file):
-    """
-    Load a graph from a CSV file containing edges.
-    
-    Args:
-        csv_file (str): Path to the CSV file containing the graph edges
-        
-    Returns:
-        networkx.Graph: The corresponding graph
-    """
     # Read the CSV file into a pandas DataFrame
     df = pd.read_csv(csv_file)
     
@@ -149,7 +130,7 @@ def load_graph_from_csv(csv_file):
 
 def main():
     # Example usage
-    csv_file = 'group_graph.csv'  # Replace with your CSV file path
+    csv_file = 'your_csv_file.csv'  # Replace with your CSV file path
     
     # Load graph from CSV
     G = load_graph_from_csv(csv_file)
